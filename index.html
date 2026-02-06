@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      color: #ff4d6d;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      50% { opacity: 0.8; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+      z-index: 2;
+    }
+
+    h1, h2 {
+      color: #ff4d6d;
+    }
+
+    .buttons {
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      position: absolute;
+      transition: 0.3s ease;
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 10px;
+    }
+
+    #noBtn {
+      background-color: #adb5bd;
+      color: white;
+      left: 20%;
+      top: 10px;
+    }
+
+    .hint-text {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #ff4d6d;
+      font-weight: bold;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    #finalScreen {
+      display: none;
+      animation: pop 0.6s ease;
+    }
+
+    #finalScreen img {
+      width: 220px;
+      margin: 20px 0;
+      border-radius: 20px;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background music -->
+  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Floating hearts -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <!-- Question Screen -->
+  <div class="container" id="questionScreen">
+    <h1>Rinku, will you be my Valentine? 💖</h1>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
+
+    <p class="hint-text">Not letting you save No 😜 — Try Yes!! 💕</p>
+  </div>
+
+  <!-- Final Screen -->
+  <div class="container" id="finalScreen">
+    <h2>Yay!!! 🥰</h2>
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2J5cXlnMm41OG44MGZrbzJ3Z2p0aTRqM3lrbDRyNHZrbjZ2Y3h5aiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l0MYyDa8S9ghzNebm/giphy.gif" />
+    <h2>Best decision ever 💕</h2>
+    <h2>I love you!! ❤️</h2>
+  </div>
+
+  <!-- Logic -->
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const questionScreen = document.getElementById('questionScreen');
+    const finalScreen = document.getElementById('finalScreen');
+    const bgMusic = document.getElementById('bgMusic');
+
+    noBtn.addEventListener('mouseenter', () => {
+      const maxX = 250;
+      const maxY = 80;
+      noBtn.style.left = Math.floor(Math.random() * maxX) + 'px';
+      noBtn.style.top = Math.floor(Math.random() * maxY) + 'px';
+    });
+
+    yesBtn.addEventListener('click', () => {
+      questionScreen.style.display = 'none';
+      finalScreen.style.display = 'block';
+      bgMusic.play();
+    });
+  </script>
+
+</body>
+</html>
